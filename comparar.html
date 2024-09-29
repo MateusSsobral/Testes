@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma e Comparação de Valores</title>
+
+</head>
+<body>
+
+
+
+    <label for="valorA">A</label>
+    <input type="number" id="valorA" placeholder="Insira o valor A"><br>
+
+    <label for="valorB">B</label>
+    <input type="number" id="valorB" placeholder="Insira o valor B"><br>
+
+    <label for="valorC">C</label>
+    <input type="number" id="valorC" placeholder="comparar"><br>
+
+    <button onclick="somarEComparar()">Comparar valores</button>
+
+    <h2>Resultado:</h2>
+    <p id="resultado "></p>
+
+    <script>
+        function somarEComparar() {
+        
+            const valorA = parseFloat(document.getElementById('valorA').value);
+            const valorB = parseFloat(document.getElementById('valorB').value);
+            const valorC = parseFloat(document.getElementById('valorC').value);
+
+        
+            const soma = valorA + valorB;
+
+            
+            let resultado = '';
+
+          
+            if (soma > valorC) { 
+                resultado = `(${valorA}) + (${valorB}) ou seja : ${soma},  é maior que C (${valorC}).`;
+            } else if (soma < valorC) {
+                resultado = `(${valorA})  + (${valorB}) ou seja : ${soma}, é menor que C (${valorC}).`;
+            } else {
+                resultado = `(${valorA}) +(${valorB}) ou seja : ${soma}, é igual a C (${valorC}).`;
+            }
+
+            document.getElementById('resultado').innerHTML = resultado;
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            border-radius: 3px;
+            border: 1px solid black;
+            background-color: gainsboro;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+ button{
+    padding-left:35px;padding-right: 35px;
+    margin-left: 17px;
+ }
+    </style>
+</body>
+</html>
