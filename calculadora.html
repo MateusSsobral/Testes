@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    animation-name: cores;
+    animation-duration: 50s;
+    animation-iteration-count: infinite;
+}
+@keyframes cores{
+    
+    0%{background: rgb(109, 18, 255);}
+    25%{background: rgb(174, 37, 253)}
+    50%{background: purple;}
+    75%{background: rgb(158, 39, 255);}
+    100%{background:rgb(109, 18, 255);}
+}
+#title{
+    position: absolute;
+    top: 5%;
+    left: 40%;
+    background-color: rgb(255, 255, 255);
+    padding: 14px;
+    border: 1px solid black;
+    color: black;
+    border-radius: 55px;
+
+    
+    font-size: 50px;
+}
+.fundo{
+    backdrop-filter: blur(50px);
+height: 100vh;
+color: white;
+font-family: Arial, Helvetica, sans-serif;
+text-align: center;
+}
+.c{
+   position: absolute;
+   background-color: rgba(0, 0, 0, 0.8); 
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%,-50%);
+   border-radius: 15px;
+   padding: 15px;
+}
+.btn{
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    cursor: pointer;
+    background-color: rgb(0, 0, 0);
+    border: none;
+    color: white;
+    transition: all .2s;
+    margin: 2px;
+    border-radius: 5px;
+} 
+.btn:hover{
+    background-color:rgb(31, 31, 31);
+    animation-duration: .2s;
+   
+    
+}
+#resultado{
+    width: 207px;
+    height: 30px;
+    margin: 6px;
+    font-size: 30px;
+    color: black;
+    text-align: right;
+    padding: 4.3px;
+    border: none;
+    background-color: aliceblue;
+}
+
+    </style>
+</head>
+<body>
+<div class="fundo">
+    <h1 id="title" onclick="a()">Calculadora JS</h1>
+    <div class="c">
+    <h1>Phillips</h1>
+    <p id="resultado" ></p>
+    <table>
+        <tr>
+<td><button class="btn" onclick="clean('C')">C</button></td>
+<td><button class="btn" onclick="back('<')"><</button></td>
+<td><button class="btn" onclick="insert('/')">/</button></td>
+<td><button class="btn" onclick="insert('*')">X</button></td>
+        </tr>
+        <tr>
+<td><button class="btn" onclick="insert('7')">7</button></td>
+<td><button class="btn" onclick="insert('8')">8</button></td>
+<td><button class="btn" onclick="insert('9')">9</button></td>
+<td><button class="btn" onclick="insert('-')">-</button></td>
+</tr>
+<tr>
+<td><button class="btn" onclick="insert('4')">4</button></td>
+<td><button class="btn" onclick="insert('5')">5</button></td>
+<td><button class="btn" onclick="insert('6')">6</button></td>
+<td><button class="btn" onclick="insert('+')">+</button></td>
+</tr>
+<tr>
+<td><button class="btn" onclick="insert('1')">1</button></td>
+<td><button class="btn" onclick="insert('2')">2</button></td>
+<td><button class="btn" onclick="insert('3')">3</button></td>
+<td rowspan="2"><button class="btn" style="height: 106px;" onclick="calcular('=')">=</button></td>
+</tr>
+<tr>
+    <td colspan="2" ><button class="btn" style="width: 106px;" onclick="insert('0')">0</button></td>
+    <td><button class="btn" onclick="insert('.')"> . </button></td>
+            </tr>
+    </table>
+
+</div>
+</div>
+<script>
+    function a(){
+document.getElementById('title').innerHTML = "Segredinho kkk";
+document.body.style.backgroundColor = "green"
+    }
+    function insert(num){
+        var numero = document.getElementById('resultado').innerHTML 
+        document.getElementById('resultado').innerHTML = numero + num}
+        function clean(){
+            document.getElementById('resultado').innerHTML = "";
+        }
+        function back(){
+            var resultado = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = resultado.substring(0, resultado.length -1)
+        }
+        function calcular(){
+            var resultado = document.getElementById('resultado').innerHTML;
+            if(resultado){
+                document.getElementById('resultado').innerHTML = eval(resultado)
+            }   
+            else{
+                var resultado = document.getElementById('resultado').innerHTML = "Error ";
+            }
+        }
+        
+</script>
+</body>
+</html>

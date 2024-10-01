@@ -1,0 +1,22 @@
+JAVA-É uma linguagem de programação para adicionar interatividade ao site(Ações ao pressionar botões,mudanças dinamicas,animações,validações de formulario)
+A tag "script" tem que estar dentro de body
+Script interno é quando está dentro da propria pagina html,a externa é quando é outro arquivo 
+conectado com a pagina para fazer os scripts
+
+declaração <- são as instruções (codigo) que fazemos que são interpretadas pelo navegador
+String= são sequências de caracteres(letras, números e/ou símbolos)
+
+var <- a instrução pode mudar
+let <- a instrução geralmente não pode mudar (só muda se um let estiver interno e o outro externo)
+const <- a instrução não muda
+
+Operadores Matematicos <-   +  ,  -  ,  *  ,   /  , ++  ,   --  , 
+Operadores de atribuição <-   = 
+Operadores de Comparação <-   ==   ,    !=   ,  ===   ,   !==  ,    <    ,    >   ,   <=  ,   >=
+Operadores ternarios <-  ? (True) " " , : (false)" "
+document.getElementById( id ).innerHTML= " " ; <-Texto html usando JS
+Alert( "texto") <- Aparece um bloco de texto
+console.log ( ); <- Aparece em console
+
+objeto-variaveis que guardam valores
+array- é um sistema que guarda valores em forma de lista(vetores)

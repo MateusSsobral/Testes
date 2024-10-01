@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- forma 1 -->
+    <button id="mensagem">Clique aqui</button> 
+
+    <script>
+// Valores da forma 1
+const btn = document.querySelector('button');
+btn.addEventListener('click',function(){
+   alert("Olá Mundo")
+})
+
+//forma 2
+//alert("Olá mundo!")
+ 
+</script>
+</body>
+</html>
+
+
+
+
+
+<style>
+    body{
+        text-align: center;
+    }
+#mensagem{
+    background-color: rgb(212, 0, 255);
+    border: 1px solid rgb(136, 0, 247);
+    font-size: 35px;
+    padding: 25px;
+    border-radius: 3px;
+    transition: all .4s;
+    backdrop-filter: blur(13px);
+    
+}
+#mensagem:hover{
+    font-size: 39px;
+    padding: 28px;
+    border-radius: 5px; 
+    animation-duration: .4s;
+    border: 2px solid rgb(136, 0, 247);
+    color:white;
+    backdrop-filter: blur(1px);
+}
+</style>

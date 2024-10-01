@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="teste"></p>
+   <input id ="cor" style="padding:60px;font-size: 40px;;" type="text" placeholder="Insira uma cor">
+   <button onclick="verificarCor()" style="padding: 60px; border-radius: 30px;">Verificar</button>
+<script>
+    
+    function verificarCor(){
+        let cor = document.getElementById("cor").value;
+
+        cor = cor.toLowerCase()
+    switch(cor){
+
+        case "azul":
+    document.body.style.backgroundColor = "blue"
+    document.getElementById("teste").innerHTML =("cor selecionada!")
+
+        break
+
+        case "vermelho":
+        document.body.style.backgroundColor = "red"
+        document.getElementById("teste").innerHTML=("cor selecionada!")
+        break
+
+        case "amarelo":
+        document.body.style.backgroundColor = "yellow"
+        document.getElementById("teste").innerHTML=("cor selecionada!")
+
+        break
+
+        case "verde":
+        document.body.style.backgroundColor = "green"
+        document.getElementById("teste").innerHTML= ("cor selecionada!")
+
+        break;
+
+        default:
+        document.getElementById("teste").innerHTML=  ("Cor não disponivel ( " + cor + " )")
+    }
+    }
+
+</script>    
+</body>
+</html>
+
