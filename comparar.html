@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soma e Comparação de Valores</title>
+  
 
 </head>
 <body>
@@ -22,14 +22,14 @@
     <button onclick="somarEComparar()">Comparar valores</button>
 
     <h2>Resultado:</h2>
-    <p id="resultado "></p>
+    <p id="resultado"></p>
 
     <script>
         function somarEComparar() {
         
-            const valorA = parseFloat(document.getElementById('valorA').value);
-            const valorB = parseFloat(document.getElementById('valorB').value);
-            const valorC = parseFloat(document.getElementById('valorC').value);
+            const valorA = Number(document.getElementById('valorA').value);
+            const valorB = Number(document.getElementById('valorB').value);
+            const valorC = Number(document.getElementById('valorC').value);
 
         
             const soma = valorA + valorB;

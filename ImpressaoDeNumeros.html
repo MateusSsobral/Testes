@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+
+<body>
+
+    <p id="ex">Conferir numero</p>
+    <label for="numero">Digite qualquer numero....</label>
+    <input type="text" id="numero">
+    <button onclick="verificarN()">Verificar</button>
+<br><br><Br>
+    <div id="conclusao"></div>
+</body>
+
+
+<script>
+    function verificarN() {
+let numero = document.getElementById("numero").value;
+
+numero = parseFloat(numero);
+
+if (isNaN(numero)) {
+document.getElementById("conclusao").innerHTML = "Insira um numero";
+
+}
+
+        let resultado = "";
+
+        if (numero > 0) {
+            resultado += `O número digitado é positivo   `;
+        } else if (numero < 0) {
+            resultado += `O número digitado é negativo   `;
+        } else {
+            resultado += `O número digitado  é zero.     `;
+         
+        }
+
+        if (numero % 2 == 0) {
+            resultado += `<br>O número digitado é par.`;
+        } else {
+            resultado += `<br> O número digitado é ímpar.`;
+        }
+
+        document.getElementById("conclusao").innerHTML = resultado;
+    }
+</script>
+
+<style>
+    
+    #conclusao{
+        
+        background-color:  rgb(204, 204, 204);
+        font-size: 40px;
+        padding: 5px;
+        transition: all .5s;
+    }
+    #conclusao:hover{
+        background-color:darkgray;
+        font-size: 43px;
+        padding: 9px;
+        animation-duration: .5s;
+    }
+button{
+
+   height: 81px;
+    font-size: 28px;
+  width: auto;
+   padding: 25px;
+   margin-top: -15px; 
+}
+*{
+    background-color:  rgb(204, 204, 204);
+    text-align: center;
+}
+input{
+    background-color: rgb(163, 163, 163);
+    width: 50px;
+    font-size: 33px;
+    height: 30px;
+   padding: 25px;
+   margin-top: -15px;
+}
+label{
+   
+    font-size: 33px;
+
+}
+#ex{
+    margin-top: 0px;
+    color: white;
+    font-size: 38px;
+   padding: 27px;
+    background-color: rgb(46, 46, 46);
+    transition: all .5s;
+}
+#ex:hover{
+    margin-top: 0px;
+    color: white;
+    font-size: 40px;
+   padding: 29px;
+    background-color: rgb(63, 63, 63);
+    animation-duration: .5s;
+}
+</style>
+</html>
