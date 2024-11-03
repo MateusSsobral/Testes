@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+  
+
 </head>
 <body>
-
-
-    
     <h2>Lista</h2>
     <input type="text" id="ti" placeholder="Digite uma nova tarefa">
     <button onclick="adicionar()">Adicionar Tarefa</button>
@@ -16,12 +14,14 @@
     <ul id="lista"></ul>
 
     <script>
-      
+
         const t = [];
+
+        
 
         function adicionar() {
             const input = document.getElementById("ti");
-            const texto = ti.value.trim();
+            const texto = input.value.trim();
 
             if (texto === "") {
                 alert("Digite sua Tarefa!!!.");
@@ -29,23 +29,31 @@
             }
 
             t.push(texto);
-
             aparecer();
-
-    
             input.value = "";
         }
+
 
         function aparecer() {
             const lista = document.getElementById("lista");
             lista.innerHTML = ""; 
 
 
-            t.forEach((task) => {
+            t.forEach((task, index) => {
                 const li = document.createElement("li");
                 li.textContent = task;
+                const remover = document.createElement("button");
+                remover.textContent = "Remover";
+                remover.className = "remover-btn";
+                remover.onclick = () => removeTxt(index);
+                li.appendChild(remover);
                 lista.appendChild(li);
             });
+        }
+
+        function removeTxt(index) {
+            t.splice(index, 1);
+            aparecer();
         }
     </script>
 </body>
@@ -56,9 +64,24 @@
         padding: 0;
     }
     li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         margin-bottom: 10px;
-        padding: 10px;
-        border: 1px solid #ccc;
+        padding: 4px;
+        border: 1px solid #3b3b3b;
         border-radius: 5px;
+        font-size: 26px;
+    }
+    button.remover-btn {
+        margin-left: 10px;
+        padding: 10px;
+        color: white;
+        background-color: red;
+        border: 1px solid black;
+        box-shadow: .8px .7px black;
+        border-radius: 3px;
+        cursor: pointer;
+    float: right;
     }
 </style>
