@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+
+
+    
+    <h2>Lista</h2>
+    <input type="text" id="ti" placeholder="Digite uma nova tarefa">
+    <button onclick="adicionar()">Adicionar Tarefa</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+      
+        const t = [];
+
+        function adicionar() {
+            const input = document.getElementById("ti");
+            const texto = ti.value.trim();
+
+            if (texto === "") {
+                alert("Digite sua Tarefa!!!.");
+                return;
+            }
+
+            t.push(texto);
+
+            aparecer();
+
+    
+            input.value = "";
+        }
+
+        function aparecer() {
+            const lista = document.getElementById("lista");
+            lista.innerHTML = ""; 
+
+
+            t.forEach((task) => {
+                const li = document.createElement("li");
+                li.textContent = task;
+                lista.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
+<style>
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
