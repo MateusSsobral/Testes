@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-
 </head>
 <body>
     <h2>Lista</h2>
@@ -14,17 +12,15 @@
     <ul id="lista"></ul>
 
     <script>
-
-        const t = [];
-
         
+        const t = [];
 
         function adicionar() {
             const input = document.getElementById("ti");
             const texto = input.value.trim();
 
             if (texto === "") {
-                alert("Digite sua Tarefa!!!.");
+                alert("Digite sua Tarefa!!!");
                 return;
             }
 
@@ -36,25 +32,50 @@
 
         function aparecer() {
             const lista = document.getElementById("lista");
-            lista.innerHTML = ""; 
+            lista.innerHTML = "";
+
 
 
             t.forEach((task, index) => {
                 const li = document.createElement("li");
                 li.textContent = task;
+
+
+                const editar = document.createElement("button");
+                editar.textContent = "Editar";
+                editar.className = "editar-btn";
+                editar.onclick = () => editarTxt(index);
+
+
                 const remover = document.createElement("button");
                 remover.textContent = "Remover";
                 remover.className = "remover-btn";
                 remover.onclick = () => removeTxt(index);
+
+
+
+                li.appendChild(editar);
                 li.appendChild(remover);
                 lista.appendChild(li);
             });
         }
 
+
         function removeTxt(index) {
             t.splice(index, 1);
             aparecer();
         }
+
+
+        
+        function editarTxt(index) {
+            const novoTexto = prompt("novo texto:", t[index]);
+            if (novoTexto !== null && novoTexto.trim() !== "") {
+                t[index] = novoTexto.trim();
+                aparecer();
+            }
+        }
+
     </script>
 </body>
 </html>
@@ -73,15 +94,19 @@
         border-radius: 5px;
         font-size: 26px;
     }
-    button.remover-btn {
-        margin-left: 10px;
+    button.remover-btn, button.editar-btn {
+        
         padding: 10px;
         color: white;
-        background-color: red;
         border: 1px solid black;
         box-shadow: .8px .7px black;
         border-radius: 3px;
         cursor: pointer;
-    float: right;
+    }
+    button.remover-btn {
+        background-color: red;
+    }
+    button.editar-btn {
+        background-color: #3b3b3b;
     }
 </style>
