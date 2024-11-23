@@ -6,8 +6,8 @@
 </head>
 <body>
     <h2>biblioteca</h2>
-    <input type="text" id="ti" placeholder="Digite o nome do livro">
-    <input type="text" id="desc" placeholder="Digite o nome do autor">
+    <input type="text" id="livr" placeholder="Digite o nome do livro">
+    <input type="text" id="autor" placeholder="Digite o nome do autor">
     <button onclick="adicionar()">Adicionar</button>
 
     <ul id="lista"></ul>
@@ -16,8 +16,8 @@
         const t = [];
 
         function adicionar() {
-            const inputTarefa = document.getElementById("ti");
-            const inputDescricao = document.getElementById("desc");
+            const inputTarefa = document.getElementById("livr");
+            const inputDescricao = document.getElementById("autor");
             const textoTarefa = inputTarefa.value.trim();
             const textoDescricao = inputDescricao.value.trim();
 
