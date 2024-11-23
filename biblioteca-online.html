@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h2>biblioteca</h2>
+    <input type="text" id="ti" placeholder="Digite o nome do livro">
+    <input type="text" id="desc" placeholder="Digite o nome do autor">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+        const t = [];
+
+        function adicionar() {
+            const inputTarefa = document.getElementById("ti");
+            const inputDescricao = document.getElementById("desc");
+            const textoTarefa = inputTarefa.value.trim();
+            const textoDescricao = inputDescricao.value.trim();
+
+            if (textoTarefa === "") {
+                alert("Digite sua tarefa!");
+                return;
+            }
+
+            if (textoDescricao === "") {
+                alert("Digite uma descrição!");
+                return;
+            }
+
+            t.push({ tarefa: textoTarefa, descricao: textoDescricao });
+            aparecer();
+            inputTarefa.value = "";
+            inputDescricao.value = "";
+        }
+
+        function aparecer() {
+            const lista = document.getElementById("lista");
+            lista.innerHTML = "";
+
+            t.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${item.tarefa} - ${item.descricao}`;
+
+                const editar = document.createElement("button");
+                editar.textContent = "Editar";
+                editar.className = "editar-btn";
+                editar.onclick = () => editarTxt(index);
+
+                const remover = document.createElement("button");
+                remover.textContent = "Remover";
+                remover.className = "remover-btn";
+                remover.onclick = () => removeTxt(index);
+
+                li.appendChild(editar);
+                li.appendChild(remover);
+                lista.appendChild(li);
+            });
+        }
+
+        function removeTxt(index) {
+            t.splice(index, 1);
+            aparecer();
+        }
+
+        function editarTxt(index) {
+            const novoTarefa = prompt("Editar tarefa:", t[index].tarefa);
+            const novaDescricao = prompt("Editar descrição:", t[index].descricao);
+
+            if (novoTarefa !== null && novoTarefa.trim() !== "") {
+                t[index].tarefa = novoTarefa.trim();
+            }
+
+            if (novaDescricao !== null && novaDescricao.trim() !== "") {
+                t[index].descricao = novaDescricao.trim();
+            }
+
+            aparecer();
+        }
+    </script>
+</body>
+</html>
+<style>
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding: 4px;
+        border: 1px solid #3b3b3b;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    button.remover-btn, button.editar-btn {
+        padding: 10px;
+        color: white;
+        border: 1px solid black;
+        box-shadow: .8px .7px black;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    button.remover-btn {
+        background-color: red;
+    }
+    button.editar-btn {
+        background-color: #3b3b3b;
+    }
+    input {
+        margin-bottom: 10px;
+        margin-right: 5px;
+    }
+</style>
