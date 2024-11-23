@@ -16,25 +16,25 @@
         const t = [];
 
         function adicionar() {
-            const inputTarefa = document.getElementById("livr");
-            const inputDescricao = document.getElementById("autor");
-            const textoTarefa = inputTarefa.value.trim();
-            const textoDescricao = inputDescricao.value.trim();
+            const InputLivro = document.getElementById("livr");
+            const InputAutor = document.getElementById("autor");
+            const txtLivro = InputLivro.value.trim();
+            const txtAutor = InputAutor.value.trim();
 
-            if (textoTarefa === "") {
+            if (txtLivro === "") {
                 alert("Digite sua tarefa!");
                 return;
             }
 
-            if (textoDescricao === "") {
+            if (txtAutor === "") {
                 alert("Digite uma descrição!");
                 return;
             }
 
-            t.push({ tarefa: textoTarefa, descricao: textoDescricao });
+            t.push({ Livros: txtLivro, Autor: txtAutor });
             aparecer();
-            inputTarefa.value = "";
-            inputDescricao.value = "";
+            InputLivro.value = "";
+            InputAutor.value = "";
         }
 
         function aparecer() {
@@ -43,7 +43,7 @@
 
             t.forEach((item, index) => {
                 const li = document.createElement("li");
-                li.textContent = `${item.tarefa} - ${item.descricao}`;
+                li.textContent = `${item.Livros} - ${item.Autor}`;
 
                 const editar = document.createElement("button");
                 editar.textContent = "Editar";
@@ -67,15 +67,15 @@
         }
 
         function editarTxt(index) {
-            const novoTarefa = prompt("Editar tarefa:", t[index].tarefa);
-            const novaDescricao = prompt("Editar descrição:", t[index].descricao);
+            const novoLivro = prompt("Editar tarefa:", t[index].Livros);
+            const NovoAutor = prompt("Editar descrição:", t[index].Autor);
 
-            if (novoTarefa !== null && novoTarefa.trim() !== "") {
-                t[index].tarefa = novoTarefa.trim();
+            if (novoLivro !== null && novoLivro.trim() !== "") {
+                t[index].Livros = novoLivro.trim();
             }
 
-            if (novaDescricao !== null && novaDescricao.trim() !== "") {
-                t[index].descricao = novaDescricao.trim();
+            if (NovoAutor !== null && NovoAutor.trim() !== "") {
+                t[index].Autor = NovoAutor.trim();
             }
 
             aparecer();
