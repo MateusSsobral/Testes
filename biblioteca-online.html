@@ -5,16 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h2>biblioteca</h2>
-    <input type="text" id="livr" placeholder="Digite o nome do livro">
+    <h2>Biblioteca</h2>
+
+    <!-- area de Pesquisa -->
+    <input type="text" id="pesquisa" placeholder="Pesquisar livros ou autores" oninput="pesquisar()">
+
+    <!-- Inputs para adicionar -->
+    <input type="text" id="livr" placeholder="Digite o nome do livro">   
     <input type="text" id="autor" placeholder="Digite o nome do autor">
-    <button onclick="adicionar()">Adicionar</button>
+    <button onclick="adicionar()" class="add">Adicionar</button>
 
     <ul id="lista"></ul>
 
     <script>
         const t = [];
 
+        // Função para adicionar livro
         function adicionar() {
             const InputLivro = document.getElementById("livr");
             const InputAutor = document.getElementById("autor");
@@ -22,68 +28,102 @@
             const txtAutor = InputAutor.value.trim();
 
             if (txtLivro === "") {
-                alert("Digite sua tarefa!");
+                alert("Digite o nome do livro!");
                 return;
             }
-
             if (txtAutor === "") {
-                alert("Digite uma descrição!");
+                alert("Digite o nome do autor!");
                 return;
             }
 
-            t.push({ Livros: txtLivro, Autor: txtAutor });
+            t.push({ Livro: txtLivro, Autor: txtAutor, bloqueado: false });
             aparecer();
+
             InputLivro.value = "";
             InputAutor.value = "";
         }
 
-        function aparecer() {
+        //Função para exibir a lista de livros
+
+        function aparecer(filtro = "") {
             const lista = document.getElementById("lista");
             lista.innerHTML = "";
 
-            t.forEach((item, index) => {
-                const li = document.createElement("li");
-                li.textContent = `${item.Livros} - ${item.Autor}`;
 
+            // filtrando o item ( ignorando se ele está maiusculo ou minusculo ) e atribuindo valores ao li
+          
+            t.filter(item => 
+                item.Livro.toLowerCase().includes(filtro.toLowerCase()) || 
+                item.Autor.toLowerCase().includes(filtro.toLowerCase())
+            ).forEach((item, index) => {  
+                const li = document.createElement("li");
+                li.textContent = `${item.Livro} - ${item.Autor}`;
+
+
+
+                // Botões
                 const editar = document.createElement("button");
                 editar.textContent = "Editar";
                 editar.className = "editar-btn";
+                editar.disabled = item.bloqueado;
                 editar.onclick = () => editarTxt(index);
 
+                const bloquear = document.createElement("button");
+                bloquear.textContent = item.bloqueado ? "Desbloquear" : "Bloquear";
+                bloquear.className = "bloquear-btn";
+                bloquear.onclick = () => bloquearTxt(index);
+              
                 const remover = document.createElement("button");
                 remover.textContent = "Remover";
                 remover.className = "remover-btn";
+                remover.disabled = item.bloqueado;
                 remover.onclick = () => removeTxt(index);
 
+                // Adicionar botões ao li
                 li.appendChild(editar);
+                li.appendChild(bloquear);
                 li.appendChild(remover);
                 lista.appendChild(li);
             });
         }
 
+        //remover item
         function removeTxt(index) {
             t.splice(index, 1);
             aparecer();
         }
 
+        //editar item
         function editarTxt(index) {
-            const novoLivro = prompt("Editar tarefa:", t[index].Livros);
-            const NovoAutor = prompt("Editar descrição:", t[index].Autor);
+            const novoLivro = prompt("Editar nome do livro:", t[index].Livro);
+            const novoAutor = prompt("Editar nome do autor:", t[index].Autor);
 
             if (novoLivro !== null && novoLivro.trim() !== "") {
-                t[index].Livros = novoLivro.trim();
+                t[index].Livro = novoLivro.trim();
             }
-
-            if (NovoAutor !== null && NovoAutor.trim() !== "") {
-                t[index].Autor = NovoAutor.trim();
+            if (novoAutor !== null && novoAutor.trim() !== "") {
+                t[index].Autor = novoAutor.trim();
             }
 
             aparecer();
+        }
+
+        //bloquear/desbloquear item
+        function bloquearTxt(index) {
+            t[index].bloqueado = !t[index].bloqueado;
+            aparecer();
+        }
+
+        // pesquisar na lista
+        function pesquisar() {
+            const filtro = document.getElementById("pesquisa").value.trim();
+            aparecer(filtro);
         }
     </script>
 </body>
 </html>
 <style>
+
     ul {
         list-style-type: none;
         padding: 0;
@@ -98,7 +138,79 @@
         border-radius: 5px;
         font-size: 18px;
     }
-    button.remover-btn, button.editar-btn {
+   
+.add{
+    margin-left: 8px;
+    background-color: gray;
+}
+
+
+    input {
+        background-color: rgb(196, 196, 197);
+        margin-bottom: 10px;
+        margin-right: 5px;
+    }
+     
+body, ul, li, button, input {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 20px;
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    background-color: #bebebe;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+button {
+    padding: 10px 14px;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+button:hover:not(:disabled) {
+    transform: scale(1.05);
+}
+
+/* Botões específicos */
+button.remover-btn, button.editar-btn, button.bloquear-btn {
         padding: 10px;
         color: white;
         border: 1px solid black;
@@ -112,8 +224,54 @@
     button.editar-btn {
         background-color: #3b3b3b;
     }
-    input {
-        margin-bottom: 10px;
-        margin-right: 5px;
+    button.bloquear-btn {
+        background-color: orange;
     }
+    button:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+button.remover-btn {
+    background-color: #e63946;
+}
+
+button.remover-btn:hover {
+    background-color: #d62839;
+}
+
+button.editar-btn {
+    background-color: #457b9d;
+}
+
+button.editar-btn:hover {
+    background-color: #356588;
+}
+
+button.bloquear-btn {
+    background-color: #f4a261;
+}
+
+button.bloquear-btn:hover {
+    background-color: #e07636;
+}
+
+
+input {
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: calc(100% - 30px);
+    max-width: 400px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s ease;
+}
+
+input:focus {
+    border-color: #5681cf;
+    outline: none;
+}
+
+
 </style>
