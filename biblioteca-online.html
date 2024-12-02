@@ -7,7 +7,7 @@
 <body>
     <h2>Biblioteca</h2>
 
-    <!-- area de Pesquisa -->
+    <!-- Área de Pesquisa -->
     <input type="text" id="pesquisa" placeholder="Pesquisar livros ou autores" oninput="pesquisar()">
 
     <!-- Inputs para adicionar -->
@@ -36,6 +36,16 @@
                 return;
             }
 
+            // Verificação para a palavra "proibido"
+            const palavraProibida = "proibido";
+            if (
+                txtLivro.toLowerCase().includes(palavraProibida) || 
+                txtAutor.toLowerCase().includes(palavraProibida)
+            ) {
+                alert("A palavra 'proibido' é invalida !");
+                return;
+            }
+
             t.push({ Livro: txtLivro, Autor: txtAutor, bloqueado: false });
             aparecer();
 
@@ -43,23 +53,17 @@
             InputAutor.value = "";
         }
 
-        //Função para exibir a lista de livros
-
+        // Função para exibir a lista de livros
         function aparecer(filtro = "") {
             const lista = document.getElementById("lista");
             lista.innerHTML = "";
 
-
-            // filtrando o item ( ignorando se ele está maiusculo ou minusculo ) e atribuindo valores ao li
-          
             t.filter(item => 
                 item.Livro.toLowerCase().includes(filtro.toLowerCase()) || 
                 item.Autor.toLowerCase().includes(filtro.toLowerCase())
             ).forEach((item, index) => {  
                 const li = document.createElement("li");
                 li.textContent = `${item.Livro} - ${item.Autor}`;
-
-
 
                 // Botões
                 const editar = document.createElement("button");
@@ -87,13 +91,13 @@
             });
         }
 
-        //remover item
+        // Remover item
         function removeTxt(index) {
             t.splice(index, 1);
             aparecer();
         }
 
-        //editar item
+        // Editar item
         function editarTxt(index) {
             const novoLivro = prompt("Editar nome do livro:", t[index].Livro);
             const novoAutor = prompt("Editar nome do autor:", t[index].Autor);
@@ -108,13 +112,13 @@
             aparecer();
         }
 
-        //bloquear/desbloquear item
+        // Bloquear/desbloquear item
         function bloquearTxt(index) {
             t[index].bloqueado = !t[index].bloqueado;
             aparecer();
         }
 
-        // pesquisar na lista
+        // Pesquisar na lista
         function pesquisar() {
             const filtro = document.getElementById("pesquisa").value.trim();
             aparecer(filtro);
@@ -123,7 +127,6 @@
 </body>
 </html>
 <style>
-
     ul {
         list-style-type: none;
         padding: 0;
@@ -138,140 +141,105 @@
         border-radius: 5px;
         font-size: 18px;
     }
-   
-.add{
-    margin-left: 8px;
-    background-color: gray;
-}
 
+    .add {
+        margin-left: 8px;
+        background-color: gray;
+    }
 
     input {
         background-color: rgb(196, 196, 197);
         margin-bottom: 10px;
         margin-right: 5px;
     }
-     
-body, ul, li, button, input {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
+    body, ul, li, button, input {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    margin: 20px;
-}
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 20px;
+    }
 
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        background-color: #bebebe;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
+    li:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    background-color: #bebebe;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-
-button {
-    padding: 10px 14px;
-    font-size: 16px;
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-button:hover:not(:disabled) {
-    transform: scale(1.05);
-}
-
-/* Botões específicos */
-button.remover-btn, button.editar-btn, button.bloquear-btn {
-        padding: 10px;
-        color: white;
-        border: 1px solid black;
-        box-shadow: .8px .7px black;
-        border-radius: 3px;
+    button {
+        padding: 10px 14px;
+        font-size: 16px;
+        color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 4px;
         cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
     }
-    button.remover-btn {
-        background-color: red;
-    }
-    button.editar-btn {
-        background-color: #3b3b3b;
-    }
-    button.bloquear-btn {
-        background-color: orange;
-    }
+
     button:disabled {
         cursor: not-allowed;
         opacity: 0.6;
     }
 
-button.remover-btn {
-    background-color: #e63946;
-}
+    button:hover:not(:disabled) {
+        transform: scale(1.05);
+    }
 
-button.remover-btn:hover {
-    background-color: #d62839;
-}
+    button.remover-btn {
+        background-color: #e63946;
+    }
 
-button.editar-btn {
-    background-color: #457b9d;
-}
+    button.remover-btn:hover {
+        background-color: #d62839;
+    }
 
-button.editar-btn:hover {
-    background-color: #356588;
-}
+    button.editar-btn {
+        background-color: #457b9d;
+    }
 
-button.bloquear-btn {
-    background-color: #f4a261;
-}
+    button.editar-btn:hover {
+        background-color: #356588;
+    }
 
-button.bloquear-btn:hover {
-    background-color: #e07636;
-}
+    button.bloquear-btn {
+        background-color: #f4a261;
+    }
 
+    button.bloquear-btn:hover {
+        background-color: #e07636;
+    }
 
-input {
-    padding: 10px 12px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: calc(100% - 30px);
-    max-width: 400px;
-    margin-bottom: 12px;
-    transition: border-color 0.2s ease;
-}
+    input {
+        padding: 10px 12px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: calc(100% - 30px);
+        max-width: 400px;
+        margin-bottom: 12px;
+        transition: border-color 0.2s ease;
+    }
 
-input:focus {
-    border-color: #5681cf;
-    outline: none;
-}
-
-
+    input:focus {
+        border-color: #5681cf;
+        outline: none;
+    }
 </style>
